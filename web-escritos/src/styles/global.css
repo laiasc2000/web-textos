@@ -494,6 +494,7 @@ pre code {
 
 .entry-card h2,
 .work-card h2 {
+  margin-bottom: 0.8rem;
   max-width: 30ch;
   line-height: normal;
   font-size: clamp(2rem, 3vw, 3rem);
@@ -503,6 +504,7 @@ pre code {
 .work-card p,
 .prose p,
 .prose li {
+  margin-bottom: 0rem;
   color: var(--color-muted);
   
 }
@@ -594,6 +596,7 @@ pre code {
 
 .prose h2,
 .prose h3 {
+  font-size: 1.3rem;
   max-width: 18ch;
   margin-top: calc(var(--baseline) * 2.2);
 }
