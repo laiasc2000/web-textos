@@ -39,20 +39,19 @@ const formatDate = (date: Date) =>
 const pageTitle = page.currentPage === 1 ? 'Blog' : `Blog · Page ${page.currentPage}`;
 ---
 
-<BaseLayout title={pageTitle} description="Notes and writing — Astro Keel, a minimal portfolio and blog theme for Astro.">
+<BaseLayout title={pageTitle} description="Articles including news, features, interviews and dissemination articles.">
   <section class="page-head section">
-    <p class="eyebrow">Blog</p>
-    <h1>Notes, essays, and release logs.</h1>
+    <!-- <p class="eyebrow">Articles</p> -->
+    <h1>Science articles</h1>
     <p class="lead">
-      The blog collection supports tags, descriptions, draft filtering, publish dates,
-      and optional hero images.
+      News, features, interviews and dissemination articles.
     </p>
   </section>
 
-  <section class="section content-index" aria-label="Blog posts">
+  <section class="section content-index" aria-label="Article posts">
     <div class="index-sidebar">
       <p class="eyebrow">Tags</p>
-      <nav class="tag-cloud" aria-label="Blog tags">
+      <nav class="tag-cloud" aria-label="Article tags">
         {allTags.map((tag) => <a href={withBase(`/blog/tags/${tag}/`)}>{tag}</a>)}
       </nav>
     </div>
@@ -64,7 +63,6 @@ const pageTitle = page.currentPage === 1 ? 'Blog' : `Blog · Page ${page.current
             <article class="entry-card">
               <div class="entry-meta">
                 <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate)}</time>
-                <span>{readingTimes.get(post.id)}</span>
                 <span>{post.data.tags.join(' / ')}</span>
               </div>
               <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>

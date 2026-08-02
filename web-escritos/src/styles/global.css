@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
   /* Change this one line to retune the theme accent. */
-  --color-accent: oklch(0.54 0.14 35);
+  --color-accent: oklch(63.994% 0.13677 161.409);
   --color-accent-hover: color-mix(in oklch, var(--color-accent), black 12%);
   --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 84%);
   --color-bg: oklch(0.99 0.003 100);
@@ -25,7 +25,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --color-accent: oklch(0.72 0.13 42);
+    --color-accent: oklch(63.994% 0.13677 161.409);
     --color-accent-hover: color-mix(in oklch, var(--color-accent), white 10%);
     --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 78%);
     --color-bg: oklch(0.18 0.009 250);
@@ -40,7 +40,7 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --color-accent: oklch(0.54 0.14 35);
+  --color-accent: oklch(63.994% 0.13677 161.409);
   --color-accent-hover: color-mix(in oklch, var(--color-accent), black 12%);
   --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 84%);
   --color-bg: oklch(0.99 0.003 100);
@@ -54,7 +54,7 @@
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --color-accent: oklch(0.72 0.13 42);
+  --color-accent: oklch(63.994% 0.13677 161.409);
   --color-accent-hover: color-mix(in oklch, var(--color-accent), white 10%);
   --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 78%);
   --color-bg: oklch(0.18 0.009 250);
@@ -241,7 +241,7 @@ a:not(.brand, .button):hover {
 }
 
 .section {
-  padding-block: clamp(3.5rem, 5.5vw, 5.5rem);
+  padding-block: clamp(1.5rem, 3vw, 5.5rem);
 }
 
 .page-head {
@@ -291,7 +291,7 @@ p {
 h1,
 h2,
 h3 {
-  max-width: 12.5ch;
+  max-width: 20ch;
   font-family: var(--font-display);
   font-variation-settings: "opsz" 72, "SOFT" 20, "WONK" 1;
   font-weight: 650;
@@ -299,8 +299,9 @@ h3 {
 }
 
 h1 {
+  margin-top: 2rem;
   margin-bottom: calc(var(--baseline) * 1.1);
-  font-size: clamp(3.25rem, 7vw, 6rem);
+  font-size: clamp(3.25rem, 5vw, 6rem);
   line-height: 0.94;
 }
 
@@ -479,8 +480,8 @@ pre code {
 
 .entry-card,
 .work-card {
-  min-height: 13rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
+  min-height: 6rem;
+  padding: clamp(1.5rem, 2vw, 3rem);
   background: var(--color-bg);
 }
 
@@ -493,8 +494,9 @@ pre code {
 
 .entry-card h2,
 .work-card h2 {
-  max-width: 15ch;
-  font-size: clamp(1.85rem, 4vw, 3.75rem);
+  max-width: 30ch;
+  line-height: normal;
+  font-size: clamp(2rem, 3vw, 3rem);
 }
 
 .entry-card p,
@@ -502,15 +504,16 @@ pre code {
 .prose p,
 .prose li {
   color: var(--color-muted);
+  
 }
 
 .entry-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem 1rem;
-  margin-bottom: var(--baseline);
+  gap: 0.2rem 1rem;
+  margin-bottom: 0.5rem;
   color: var(--color-muted);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
