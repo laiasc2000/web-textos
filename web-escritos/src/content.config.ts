@@ -4,6 +4,10 @@ import { z } from 'astro/zod';
 
 // Astro 7 Content Layer API: each collection declares a `loader`.
 // Authors add Markdown/MDX files under the `base` directories below.
+
+/** Article categories. An article may carry many tags but only one category. */
+export const CATEGORIES = ['News', 'Feature', 'Interview', 'Profile', 'Explainer', 'Story'] as const;
+
 const works = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/works' }),
   schema: ({ image }) =>
@@ -26,6 +30,7 @@ const blog = defineCollection({
       title: z.string(),
       publishDate: z.coerce.date(),
       tags: z.array(z.string()).default([]),
+      category: z.enum(CATEGORIES).default('News'),
       description: z.string(),
       draft: z.boolean().default(false),
       heroImage: image().optional(),

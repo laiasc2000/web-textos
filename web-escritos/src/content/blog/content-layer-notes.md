@@ -4,6 +4,7 @@ publishDate: 2026-02-03
 tags:
   - astro
   - content
+category: Explainer
 description: "Practical notes for keeping Astro content collections predictable."
 draft: false
 ---

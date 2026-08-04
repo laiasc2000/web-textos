@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../content.config';
+import { withBase } from '../../lib/url';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) => a.localeCompare(b));
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(date);
+---
+
+<BaseLayout title="Blog" description="Articles including news, features, interviews and dissemination articles.">
+  <section class="page-head section">
+    <!-- <p class="eyebrow">Articles</p> -->
+    <h1>Science articles</h1>
+    <p class="lead">
+      News, features, interviews and dissemination articles.
+    </p>
+  </section>
+
+  <section class="section content-index" aria-label="Article posts">
+    <div class="index-sidebar">
+      <p class="eyebrow">Categories</p>
+      <div class="filter-group" data-category-filters>
+        <button type="button" class="filter-chip is-active" data-category="">All</button>
+        {CATEGORIES.map((category) => (
+          <button type="button" class="filter-chip" data-category={category}>{category}</button>
+        ))}
+      </div>
+
+      <p class="eyebrow">Tags</p>
+      <div class="filter-group" data-tag-filters>
+        {allTags.map((tag) => (
+          <button type="button" class="filter-chip" data-tag={tag}>{tag}</button>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <div class="entry-list">
+        {
+          posts.map((post) => (
+            <article
+              class="entry-card"
+              data-category={post.data.category}
+              data-tags={post.data.tags.join(' ')}
+            >
+              <div class="entry-meta">
+                <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate)}</time>
+                <span class="entry-category">{post.data.category}</span>
+                <span>{post.data.tags.join(' / ')}</span>
+              </div>
+              <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>
+              <p>{post.data.description}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="filter-empty" hidden>No articles match the selected filters.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: calc(var(--baseline) * 1.2);
+  }
+
+  .filter-chip {
+    border: var(--hairline);
+    padding: 0.35rem 0.7rem;
+    background: var(--color-bg);
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease;
+  }
+
+  .filter-chip:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .filter-chip.is-active {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: oklch(0.99 0.003 100);
+  }
+
+  .entry-category {
+    color: var(--color-accent);
+  }
+
+  .filter-empty {
+    margin: 0;
+    padding: calc(var(--baseline) * 1.5) 0;
+    border-top: var(--hairline);
+    border-bottom: var(--hairline);
+    color: var(--color-muted);
+  }
+</style>
+
+<script>
+  const categoryButtons = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-category-filters] [data-category]'),
+  );
+  const tagButtons = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-tag-filters] [data-tag]'),
+  );
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.entry-card'));
+  const empty = document.querySelector<HTMLElement>('.filter-empty');
+
+  let activeCategory = '';
+  const activeTags = new Set<string>();
+
+  const apply = () => {
+    let visible = 0;
+    for (const card of cards) {
+      const category = card.dataset.category || '';
+      const tags = (card.dataset.tags || '').split(' ').filter(Boolean);
+      const matchesCategory = !activeCategory || category === activeCategory;
+      const matchesTags = activeTags.size === 0 || [...activeTags].some((tag) => tags.includes(tag));
+      const show = matchesCategory && matchesTags;
+      card.hidden = !show;
+      if (show) visible += 1;
+    }
+    if (empty) empty.hidden = visible !== 0;
+  };
+
+  for (const button of categoryButtons) {
+    button.addEventListener('click', () => {
+      activeCategory = button.dataset.category ?? '';
+      for (const b of categoryButtons) b.classList.toggle('is-active', b === button);
+      apply();
+    });
+  }
+
+  for (const button of tagButtons) {
+    button.addEventListener('click', () => {
+      const tag = button.dataset.tag ?? '';
+      if (activeTags.has(tag)) {
+        activeTags.delete(tag);
+        button.classList.remove('is-active');
+      } else {
+        activeTags.add(tag);
+        button.classList.add('is-active');
+      }
+      apply();
+    });
+  }
+</script>

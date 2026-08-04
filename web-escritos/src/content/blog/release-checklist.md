@@ -4,6 +4,7 @@ publishDate: 2026-03-18
 tags:
   - process
   - release
+category: Story
 description: "A compact checklist for shipping a portfolio update without drama."
 draft: false
 ---

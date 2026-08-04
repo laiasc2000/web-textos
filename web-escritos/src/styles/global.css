@@ -607,8 +607,10 @@ pre code {
 .article-image {
   display: block;
   width: 100%;
+  max-width: var(--prose-width);
   height: auto;
   margin-top: calc(var(--baseline) * 2);
+  margin-inline: auto;
   border: var(--hairline);
 }
 
