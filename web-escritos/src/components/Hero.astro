@@ -1,0 +1,212 @@
+---
+import { withBase } from '../lib/url';
+---
+
+<section id="hero" class="hero-mintaka section">
+  <div class="hero-mintaka-inner">
+    <p class="eyebrow">Portfolio / writing / systems notes</p>
+
+    <h1>
+      <span class="hero-line">Science</span>
+      <span class="rotator" aria-hidden="true">
+        <span>news</span>
+        <span>features</span>
+        <span>interviews</span>
+        <span>stories</span>
+        <span>profiles</span>
+        <span>news</span>
+      </span>
+    </h1>
+
+    <p class="sr-only">News, features, interviews, stories and profiles.</p>
+    <p class="hero-subtitle">
+      Science journalist and physicist specialized in fundamental science.
+    </p>
+
+    <div class="action-row hero-actions" aria-label="Primary links">
+      <a class="button" href={withBase('/blog/')}>Read articles</a>
+      <small class="hero-scroll">
+        or
+        <button class="hero-scroll-link" type="button" data-scroll-to="projects">
+          scroll down to explore more
+        </button>
+      </small>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-mintaka {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+    border-bottom: var(--hairline);
+    overflow: hidden;
+  }
+
+  .hero-mintaka-inner {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-mintaka-inner > * {
+    animation: keel-enter 640ms ease both;
+  }
+
+  .hero-mintaka-inner > :nth-child(2) {
+    animation-delay: 90ms;
+  }
+
+  .hero-mintaka-inner > :nth-child(3) {
+    animation-delay: 180ms;
+  }
+
+  .hero-mintaka-inner > :nth-child(4) {
+    animation-delay: 270ms;
+  }
+
+  .hero-mintaka h1 {
+    max-width: none;
+    margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+    font-size: clamp(3.5rem, 10vw, 8.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .hero-line {
+    display: block;
+  }
+
+  .rotator {
+    position: relative;
+    display: block;
+    height: 1.05em;
+    margin-top: 0.08em;
+    overflow: hidden;
+  }
+
+  .rotator > span {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: word-cycle 18s ease-in-out infinite;
+  }
+
+  .rotator > span:nth-child(2) {
+    animation-delay: -3s;
+  }
+
+  .rotator > span:nth-child(3) {
+    animation-delay: -6s;
+  }
+
+  .rotator > span:nth-child(4) {
+    animation-delay: -9s;
+  }
+
+  .rotator > span:nth-child(5) {
+    animation-delay: -12s;
+  }
+
+  .rotator > span:nth-child(6) {
+    animation-delay: -15s;
+  }
+
+  .hero-subtitle {
+    max-width: 54ch;
+    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    margin-top: calc(var(--baseline) * 1.5);
+  }
+
+  .hero-scroll {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .hero-scroll-link {
+    border: none;
+    padding: 0;
+    background: none;
+    color: var(--color-accent);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklch, var(--color-accent), transparent 55%);
+    text-underline-offset: 3px;
+  }
+
+  .hero-scroll-link:hover {
+    color: var(--color-accent-hover);
+  }
+
+  @keyframes word-cycle {
+    0%,
+    2% {
+      opacity: 0;
+      transform: translateY(120%);
+    }
+
+    8% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    14% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    17% {
+      opacity: 0;
+      transform: translateY(-120%);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-120%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-mintaka-inner > * {
+      animation: none;
+    }
+
+    .rotator > span {
+      animation: none;
+    }
+
+    .rotator > span:not(:first-child) {
+      display: none;
+    }
+
+    .rotator > span:first-child {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  document
+    .querySelector('[data-scroll-to="projects"]')
+    ?.addEventListener('click', () => {
+      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
