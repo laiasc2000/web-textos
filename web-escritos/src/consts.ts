@@ -12,6 +12,8 @@ export const SITE = {
   ogImage: '/og.jpg',
   /** Footer credit line. */
   footerText: '© 2026 Laia Serradesanferm Córdoba. All rights reserved.',
+  /** LinkedIn profile URL, shown as an icon in the site header. */
+  linkedin: 'https://www.linkedin.com/in/laia-serradesanferm-c%C3%B3rdoba-391044271/',
 } as const;
 
 /** Header navigation. `href` is relative to the site root; the configured
