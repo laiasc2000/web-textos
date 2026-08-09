@@ -614,6 +614,15 @@ pre code {
   border: var(--hairline);
 }
 
+.prose img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block: calc(var(--baseline) * 1.5);
+  margin-inline: auto;
+  border: var(--hairline);
+}
+
 .article-toc nav {
   flex-direction: column;
   align-items: flex-start;
