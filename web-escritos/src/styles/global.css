@@ -638,7 +638,12 @@ pre code {
   max-width: var(--prose-width);
 }
 
-.prose h2,
+.prose h2 {
+  font-size: 1.3rem;
+  max-width: none;
+  margin-top: calc(var(--baseline) * 2.2);
+}
+
 .prose h3 {
   font-size: 1.3rem;
   max-width: 18ch;
