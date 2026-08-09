@@ -324,7 +324,7 @@ p {
 h1,
 h2,
 h3 {
-  max-width: 20ch;
+  max-width: 30ch;
   font-family: var(--font-display);
   font-variation-settings: "opsz" 72, "SOFT" 20, "WONK" 1;
   font-weight: 650;
@@ -355,7 +355,7 @@ p {
 }
 
 .lead {
-  max-width: var(--prose-width);
+  max-width: 110ch;
   color: var(--color-muted);
   font-size: clamp(1.1rem, 1.6vw, 1.28rem);
   line-height: 1.85;

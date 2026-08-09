@@ -143,10 +143,14 @@ Neutral palettes for both schemes live in `src/styles/global.css` under `:root`,
 
 ## Authoring content
 
-Add Markdown/MDX files under `src/content/`:
+Content is managed through **Keystatic**, the CMS that ships with this theme.
 
-- `src/content/works/*.md` — portfolio entries
-- `src/content/blog/*.md` — blog posts
+- Run `npm run dev` and open <http://localhost:4321/keystatic>.
+- Articles, categories, tags, the main image, and the article body are all edited in the admin UI. Entries are saved as files in the repo:
+  - `src/content/blog/<slug>/index.mdx` — blog posts
+  - `src/content/works/*.md` — portfolio entries
+- Uploaded images are stored in `src/assets/images/blog/` and optimized by Astro's image pipeline.
+- The `/keystatic` admin UI is dev-only. Production builds (GitHub Pages) skip it via `SKIP_KEYSTATIC=true`, which the `build` script sets automatically.
 
 ### Works frontmatter
 
@@ -171,10 +175,13 @@ title: Post title
 publishDate: 2026-06-01
 description: One-line summary for listings, SEO, and RSS.
 tags: ["design", "astro"]
-draft: false                     # true hides it from build output
-heroImage: ./hero.png            # optional — relative image
+category: News                       # News, Feature, Interview, Profile, Explainer, Story
+draft: false                         # true hides it from build output
+heroImage: "@assets/..."             # optional — main image, set via Keystatic
 ---
 ```
+
+> These fields are edited in Keystatic; you only need the raw frontmatter if you write files by hand.
 
 ## Project structure
 
@@ -183,10 +190,12 @@ src/
   consts.ts          # site name, description, nav, footer
   content/           # works/ and blog/ Markdown & MDX entries
   content.config.ts  # collection schemas (Content Layer API)
+  assets/            # images uploaded through Keystatic (blog/)
   layouts/           # BaseLayout (head, nav, theme toggle)
   pages/             # routes: /, /about, /works, /blog, tags, rss.xml
   styles/            # global.css design tokens
 astro.config.mjs     # site URL, integrations, Shiki config
+keystatic.config.ts  # Keystatic CMS schema (local dev at /keystatic)
 ```
 
 ## Deployment

@@ -24,7 +24,16 @@ const works = defineCollection({
 });
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
+  loader: glob({
+    pattern: '**/[^_]*.{md,mdx}',
+    base: './src/content/blog',
+    // Keystatic saves each entry as <slug>/index.mdx; strip the index file so
+    // entry ids (and URLs) stay clean: /blog/<slug>/.
+    generateId: ({ entry }) =>
+      entry
+        .replace(/\/index\.(md|mdx)$/i, '')
+        .replace(/\.(md|mdx)$/i, ''),
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),

@@ -1,0 +1,63 @@
+---
+title: >-
+  Un modelo informático simula el impacto de las políticas públicas en la
+  pobreza
+publishDate: 2025-02-25
+category: News
+tags:
+  - Simulación
+  - Sociología
+description: >-
+  El CSIC ha elaborado un sistema que permitirá a gobiernos y ayuntamientos
+  simular con antelación si sus medidas son discriminatorias o contribuyen al
+  aumento de la pobreza.
+draft: false
+heroImage: '@assets/images/blog/Noticia Alba/heroImage.webp'
+---
+La pobreza es uno de los problemas más antiguos de la historia de la humanidad. En las últimas décadas su reducción se ha desacelerado, mientras que la **discriminación hacia la población más pobre**, un fenómeno llamado **aporofobia**, ha ido en aumento.
+
+
+
+La relación entre **aporofobia** y **pobreza** ha sido teorizada desde el ámbito de la sociología en numerosas ocasiones, pero sin pruebas empíricas que la avalen. En este este contexto, un grupo del [Instituto de Investigación de Inteligencia Artificial](https://www.iiia.csic.es/es/) (IIIA-CSIC), en colaboración con la Universidad de Notre-Dame (Estados Unidos), ha realizado la **primera simulación numérica** (es decir, a través de algoritmos y programas informáticos) para respaldar la correlación entre las **políticas aporofóbicas y el aumento de la pobreza y la desigualdad económica** en la población de Barcelona.
+
+Este tipo de modelo podría representar una nueva manera de hacer política, ya que permite a los gobiernos comprobar el efecto de potenciales leyes antes de llevarlas a la práctica.
+
+## Cómo modelar la sociedad barcelonesa
+
+En el proyecto, llamado AABM (**Aporophobia Agent-Based Model**), se construyó un modelo de la **sociedad barcelonesa** formado por 100 agentes con distintos perfiles (edad, sexo, nivel de riqueza, etc.). Dichos perfiles se crearon de acuerdo con los datos demográficos de **cuatro barrios de la ciudad**: Sarrià-Sant Gervasi, Gràcia, Les Corts y Eixample.
+
+En la simulación, dichos agentes debían satisfacer sus necesidades realizando las acciones que más les convenían en cada momento.
+
+Pongamos el ejemplo de un agente con una riqueza de 1.500€ cuya necesidad más apremiante en ese momento es la de “comer”. Eso le lleva a realizar la acción “ir al supermercado”, lo cual actualiza su situación, rebajando la urgencia de la necesidad “comer” y disminuyendo su riqueza a 1.450€ (suponiendo que en el supermercado se gastó 50€). Entonces el modelo reevalúa la situación para decidir cuál es la siguiente acción que el agente debería tomar. La probabilidad de que vuelva a ir al supermercado es muy baja, ya que la necesidad comer ha sido satisfecha. Puede que en cambio ahora vaya a comprar ropa o pase tiempo con su familia, dependiendo del perfil del agente y sus otras necesidades actuales.
+
+Pero, **¿cómo se puede modelar el comportamiento de una comunidad, su elección de acciones**, usando el lenguaje informático? Las relaciones que se producen dentro de un grupo, por pequeño que sea, son extremadamente complejas, ya que dependen de una infinidad de variables interrelacionadas. Una simulación numérica pretende desgranar este intrincado entramado detectando aquellas variables más influyentes y, con ellas, construir una simplificación de la realidad.
+
+En el caso del AABM, el perfil es una pieza clave. Todos los agentes tienen necesidades (comer, tener ropa, pasar tiempo con la familia...). Sin embargo, “el perfil determina la **urgencia** de satisfacer cada necesidad, la **satisfacción** esperada al realizarla y su **importancia** (basada en la [pirámide de Maslow](https://roashunter.com/piramide-de-maslow-la-jerarquia-de-las-necesidades-humanas/#:~:text=La%20pir%C3%A1mide%20de%20Maslow%20es,la%20pertenencia%20y%20el%20amor.)). Aquella acción que maximice la llamada función de deliberación, la cual depende de estas tres características, será la escogida”, explica Alba Aguilera, investigadora del IIIA y primera autora del artículo.
+
+> *El perfil determina la urgencia, satisfacción e importancia de cada necesidad.*
+
+## El efecto de las normas sociales
+
+La simulación evolucionó bajo varios escenarios posibles, cada uno de ellos caracterizado por un conjunto de leyes que se imponían al modelo. El objetivo era **observar cómo variaba la distribución de riqueza** de la sociedad en cada caso.
+
+Para esta primera prueba se incluyeron solamente seis leyes pertenecientes al Boletín Oficial del Estado, tres de ellas consideradas no-aporofóbicas y otras tres consideradas aporofóbicas (resumidas en la tabla). Estas leyes solamente se aplican al ciudadano si su perfil reúne las condiciones necesarias y, en caso afirmativo, tienen un efecto en él.
+
+De este modo, en cada escenario, se modelaron las acciones de toda una sociedad, cuyas necesidades individuales iban evolucionando en el tiempo. Al final del experimento se compararon las distribuciones de riqueza de la población en función de qué leyes fueron aplicadas. 
+
+![Tabla de las leyes del BOE utilizadas en el estudio.](@assets/images/blog/Noticia%20Alba/tabla%20recortada.png)
+
+## Una nueva manera de hacer política
+
+Tras realizar la simulación para todas las combinaciones de las seis leyes, se extrajeron resultados concluyentes: **aplicando solamente las normas no-aporofóbicas se obtenía la distribución de riqueza más igualitaria, mientras que aplicando únicamente las aporofóbicas se registraba el mayor número de agentes en la absoluta pobreza**. Además, se pudo identificar la Norma 1 (véase la tabla) como aquella que contribuía de manera más significativa a la reducción de la pobreza extrema.
+
+Esto indica que podría existir una correlación entre la discriminación legal hacia la pobreza y su aumento. Pero lo más innovador es que **el estudio se realizó de manera no invasiva**, es decir, sin que afectara a población real.
+
+Las propias investigadoras apuntan que, aunque todavía existe mucho margen de mejora, su modelo ya podría aplicarse a otras ciudades del mundo usando los datos demográficos correspondientes y ampliarse añadiendo más leyes, dos líneas de trabajo que el IIIA-CSIC planea estudiar próximamente.
+
+> *Su modelo ya podría aplicarse a otras ciudades del mundo*
+
+De momento, las conclusiones de este estudio preliminar ya son muy prometedoras, con una clara aplicación en políticas municipales. De hecho, el refinamiento de este tipo de modelo permitiría a los órganos ejecutivos tomar decisiones con fundamento computacional, sin tener que usar a la población como conejillo de indias de sus nuevas políticas y dotándolos de una potente herramienta para reducir de manera eficiente problemas como la pobreza.
+
+### Referencia:
+
+A. Aguilera, N. Montes, G. Curto, C. Sierra, N. Osman, Can poverty be reduced by acting on discrimination? An agent-based model for policy making, *IFAAMAS*, 2024.\\

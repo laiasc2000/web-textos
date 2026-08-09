@@ -2,6 +2,7 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
+import type { ReactNode } from 'react';
 import satori from 'satori';
 import sharp from 'sharp';
 import { SITE } from '../../../consts';
@@ -180,7 +181,7 @@ export const GET: APIRoute<OgProps> = async ({ props }) => {
           },
         },
       },
-    },
+    } as unknown as ReactNode,
     {
       width: 1200,
       height: 630,
