@@ -100,13 +100,15 @@ const formatDate = (date: Date) =>
   a.work-preview-image {
     display: block;
     background-image: none;
+    aspect-ratio: 5 / 3;
+    overflow: hidden;
   }
 
   .work-preview-image img,
   .work-preview-placeholder {
     display: block;
     width: 100%;
-    aspect-ratio: 3 / 2;
+    height: 100%;
     object-fit: cover;
     border: var(--hairline);
     background: var(--color-soft);
