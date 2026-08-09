@@ -638,6 +638,10 @@ pre code {
   max-width: var(--prose-width);
 }
 
+.prose p {
+  margin-bottom: 1.25rem;
+}
+
 .prose h2 {
   font-size: 1.3rem;
   max-width: none;
@@ -666,6 +670,17 @@ pre code {
 
 .prose pre {
   margin-block: calc(var(--baseline) * 1.5);
+}
+
+.prose blockquote {
+  margin-block: calc(var(--baseline) * 1.5);
+  padding-inline: 1.5rem;
+  border-inline-start: 2px solid var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--color-text);
 }
 
 /* Shiki dual themes: github-light by default, github-dark under data-theme. */
