@@ -33,7 +33,7 @@ const formatDate = (date: Date) =>
 >
   <article data-pagefind-body>
     <header class="page-head section article-head">
-      <p class="eyebrow">Article</p>
+      <p class="eyebrow">{entry.data.category}</p>
       <h1>{entry.data.title}</h1>
       <MarkdownText content={entry.data.description} class="lead" />
       <div class="entry-meta">
