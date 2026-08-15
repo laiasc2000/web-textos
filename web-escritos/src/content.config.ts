@@ -8,6 +8,9 @@ import { z } from 'astro/zod';
 /** Article categories. An article may carry many tags but only one category. */
 export const CATEGORIES = ['News', 'Feature', 'Interview', 'Profile', 'Explainer', 'Story'] as const;
 
+/** Article languages. An article is written in exactly one language. */
+export const LANGUAGES = ['CAT', 'ESP', 'ENG'] as const;
+
 const works = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/works' }),
   schema: ({ image }) =>
@@ -40,6 +43,7 @@ const blog = defineCollection({
       publishDate: z.coerce.date(),
       tags: z.array(z.string()).default([]),
       category: z.enum(CATEGORIES).default('News'),
+      language: z.enum(LANGUAGES).default('ENG'),
       description: z.string(),
       draft: z.boolean().default(false),
       heroImage: image().optional(),

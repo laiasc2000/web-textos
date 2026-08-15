@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIES } from '../../content.config';
+import { CATEGORIES, LANGUAGES } from '../../content.config';
 import { withBase } from '../../lib/url';
 import MarkdownText from '../../components/MarkdownText.astro';
 
@@ -43,6 +43,14 @@ const formatDate = (date: Date) =>
           <button type="button" class="filter-chip" data-tag={tag}>{tag}</button>
         ))}
       </div>
+
+      <p class="eyebrow">Languages</p>
+      <div class="filter-group" data-language-filters>
+        <button type="button" class="filter-chip is-active" data-language="">All</button>
+        {LANGUAGES.map((language) => (
+          <button type="button" class="filter-chip" data-language={language}>{language}</button>
+        ))}
+      </div>
     </div>
 
     <div>
@@ -53,6 +61,7 @@ const formatDate = (date: Date) =>
               class="entry-card"
               data-category={post.data.category}
               data-tags={post.data.tags.join(' ')}
+              data-language={post.data.language}
             >
               <div class="entry-meta">
                 <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate)}</time>
@@ -123,20 +132,26 @@ const formatDate = (date: Date) =>
   const tagButtons = Array.from(
     document.querySelectorAll<HTMLElement>('[data-tag-filters] [data-tag]'),
   );
+  const languageButtons = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-language-filters] [data-language]'),
+  );
   const cards = Array.from(document.querySelectorAll<HTMLElement>('.entry-card'));
   const empty = document.querySelector<HTMLElement>('.filter-empty');
 
   let activeCategory = '';
+  let activeLanguage = '';
   const activeTags = new Set<string>();
 
   const apply = () => {
     let visible = 0;
     for (const card of cards) {
       const category = card.dataset.category || '';
+      const language = card.dataset.language || '';
       const tags = (card.dataset.tags || '').split(' ').filter(Boolean);
       const matchesCategory = !activeCategory || category === activeCategory;
+      const matchesLanguage = !activeLanguage || language === activeLanguage;
       const matchesTags = activeTags.size === 0 || [...activeTags].some((tag) => tags.includes(tag));
-      const show = matchesCategory && matchesTags;
+      const show = matchesCategory && matchesLanguage && matchesTags;
       card.hidden = !show;
       if (show) visible += 1;
     }
@@ -161,6 +176,14 @@ const formatDate = (date: Date) =>
         activeTags.add(tag);
         button.classList.add('is-active');
       }
+      apply();
+    });
+  }
+
+  for (const button of languageButtons) {
+    button.addEventListener('click', () => {
+      activeLanguage = button.dataset.language ?? '';
+      for (const b of languageButtons) b.classList.toggle('is-active', b === button);
       apply();
     });
   }

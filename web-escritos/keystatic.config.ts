@@ -10,6 +10,13 @@ const CATEGORIES = [
   { label: 'Story', value: 'Story' },
 ] as const;
 
+// Article languages — keep in sync with LANGUAGES in src/content.config.ts.
+const LANGUAGES = [
+  { label: 'Catalan (CAT)', value: 'CAT' },
+  { label: 'Spanish (ESP)', value: 'ESP' },
+  { label: 'English (ENG)', value: 'ENG' },
+] as const;
+
 // Images are stored under src/assets so Astro can optimize them. The @assets
 // alias (mapped in tsconfig.json) keeps the stored paths resolvable.
 const imageOptions = {
@@ -29,7 +36,7 @@ export default config({
       path: 'src/content/blog/*',
       format: { contentField: 'content' },
       entryLayout: 'content',
-      columns: ['title', 'category', 'publishDate', 'draft'],
+      columns: ['title', 'category', 'language', 'publishDate', 'draft'],
       schema: {
         title: fields.slug({
           name: { label: 'Title', validation: { isRequired: true } },
@@ -44,6 +51,12 @@ export default config({
           description: 'Used to filter articles on the blog page.',
           options: CATEGORIES,
           defaultValue: 'News',
+        }),
+        language: fields.select({
+          label: 'Language',
+          description: 'Language the article is written in. Only one can be selected.',
+          options: LANGUAGES,
+          defaultValue: 'ENG',
         }),
         tags: fields.array(
           fields.text({ label: 'Tag', validation: { isRequired: true } }),
