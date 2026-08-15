@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { withBase } from '../lib/url';
+import MarkdownText from './MarkdownText.astro';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -60,7 +61,7 @@ const formatDate = (date: Date) =>
                     <span class="work-preview-arrow" aria-hidden="true">&rarr;</span>
                   </a>
                 </h3>
-                <p class="work-preview-description">{post.data.description}</p>
+                <MarkdownText content={post.data.description} class="work-preview-description" />
               </div>
             </li>
           ))

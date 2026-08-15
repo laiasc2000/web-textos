@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 import satori from 'satori';
 import sharp from 'sharp';
 import { SITE } from '../../../consts';
+import { markdownToText } from '../../../lib/markdown';
 
 // Build-time generated Open Graph images for every blog post and work entry,
 // rendered in the theme's light palette (see global.css tokens). The static
@@ -20,23 +21,19 @@ interface OgProps {
 export const getStaticPaths = (async () => {
   const blog = await getCollection('blog', ({ data }) => !data.draft);
   const works = await getCollection('works');
+  const toOg = async (
+    entry: { data: { title: string; description: string } },
+    kind: string,
+  ): Promise<OgProps> => ({
+    title: entry.data.title,
+    description: await markdownToText(entry.data.description),
+    kind,
+  });
+  const blogProps = await Promise.all(blog.map((entry) => toOg(entry, 'Blog')));
+  const worksProps = await Promise.all(works.map((entry) => toOg(entry, 'Work')));
   return [
-    ...blog.map((entry) => ({
-      params: { collection: 'blog', slug: entry.id },
-      props: {
-        title: entry.data.title,
-        description: entry.data.description,
-        kind: 'Blog',
-      } satisfies OgProps,
-    })),
-    ...works.map((entry) => ({
-      params: { collection: 'works', slug: entry.id },
-      props: {
-        title: entry.data.title,
-        description: entry.data.description,
-        kind: 'Work',
-      } satisfies OgProps,
-    })),
+    ...blogProps.map((props, i) => ({ params: { collection: 'blog', slug: blog[i].id }, props })),
+    ...worksProps.map((props, i) => ({ params: { collection: 'works', slug: works[i].id }, props })),
   ];
 }) satisfies GetStaticPaths;
 
