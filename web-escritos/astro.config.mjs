@@ -6,6 +6,7 @@ import react from '@astrojs/react';
 import node from '@astrojs/node';
 import keystatic from '@keystatic/astro';
 import { remarkReadingTime } from './remark-reading-time.mjs';
+import rehypeFigureImages from './rehype-figure-images.mjs';
 
 // https://astro.build/config
 // Keystatic's admin UI and API run on server routes (Node APIs). The site
@@ -32,6 +33,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [rehypeFigureImages],
     // Dual Shiki themes; `defaultColor: false` emits CSS variables
     // (--shiki-light / --shiki-dark) so global.css can switch with the theme.
     shikiConfig: {

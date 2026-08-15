@@ -55,7 +55,7 @@ export default config({
         ),
         description: fields.text({
           label: 'Description',
-          description: 'One-line summary shown in listings, search and SEO.',
+          description: 'Summary shown in listings, search and SEO. Supports markdown: links, italics, bold and line breaks.',
           multiline: true,
           validation: { isRequired: true },
         }),
@@ -68,6 +68,11 @@ export default config({
           label: 'Main image',
           description: 'Shown at the top of the article and on the home page.',
           ...imageOptions,
+        }),
+        heroImageCaption: fields.text({
+          label: 'Main image caption',
+          description: 'Optional caption shown below the main image.',
+          multiline: true,
         }),
         content: fields.mdx({
           label: 'Content',

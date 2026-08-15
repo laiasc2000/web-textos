@@ -42,13 +42,16 @@ const formatDate = (date: Date) =>
       </div>
       {
         entry.data.heroImage && (
-          <Image
-            class="article-image"
-            src={entry.data.heroImage}
-            alt=""
-            widths={[720, 1040, 1400]}
-            sizes="(min-width: 900px) 72rem, 100vw"
-          />
+          <figure class="article-hero">
+            <Image
+              class="article-image"
+              src={entry.data.heroImage}
+              alt=""
+              widths={[720, 1040, 1400]}
+              sizes="(min-width: 900px) 72rem, 100vw"
+            />
+            {entry.data.heroImageCaption && <figcaption>{entry.data.heroImageCaption}</figcaption>}
+          </figure>
         )
       }
     </header>

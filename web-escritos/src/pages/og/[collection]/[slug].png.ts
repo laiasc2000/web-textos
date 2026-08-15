@@ -12,11 +12,11 @@ import { markdownToText } from '../../../lib/markdown';
 // rendered in the theme's light palette (see global.css tokens). The static
 // `public/og.jpg` remains the site-wide fallback for all other pages.
 
-interface OgProps {
+type OgProps = {
   title: string;
   description: string;
   kind: string;
-}
+};
 
 export const getStaticPaths = (async () => {
   const blog = await getCollection('blog', ({ data }) => !data.draft);
