@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 
+const tocHeadings = headings.filter((heading) => heading.depth === 2);
 const description = await markdownToText(entry.data.description);
 
 const formatDate = (date: Date) =>
@@ -56,17 +57,19 @@ const formatDate = (date: Date) =>
       }
     </header>
 
-    <div class="section article-layout">
-      <aside class="article-toc" aria-label="Table of contents">
-        <p class="eyebrow">Contents</p>
-        <nav>
-          {
-            headings
-              .filter((heading) => heading.depth === 2)
-              .map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)
-          }
-        </nav>
-      </aside>
+    <div
+      class:list={['section', 'article-layout', tocHeadings.length === 0 && 'article-layout--no-toc']}
+    >
+      {
+        tocHeadings.length > 0 && (
+          <aside class="article-toc" aria-label="Table of contents">
+            <p class="eyebrow">Contents</p>
+            <nav>
+              {tocHeadings.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}
+            </nav>
+          </aside>
+        )
+      }
       <div class="prose">
         <Content />
       </div>
