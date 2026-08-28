@@ -8,7 +8,15 @@ import MarkdownText from '../../components/MarkdownText.astro';
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
-const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) => a.localeCompare(b));
+const tagCounts = new Map<string, number>();
+for (const tag of posts.flatMap((post) => post.data.tags)) {
+  tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+}
+const allTags = [...tagCounts.keys()].sort(
+  (a, b) => (tagCounts.get(b) ?? 0) - (tagCounts.get(a) ?? 0) || a.localeCompare(b),
+);
+const TAGS_VISIBLE = 5;
+const tagOverflow = allTags.length > TAGS_VISIBLE;
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat('en', {
@@ -38,11 +46,19 @@ const formatDate = (date: Date) =>
       </div>
 
       <p class="eyebrow">Tags</p>
-      <div class="filter-group" data-tag-filters>
+      <div
+        class:list={['filter-group', 'tag-cluster', { 'is-collapsed': tagOverflow }]}
+        data-tag-filters
+      >
         {allTags.map((tag) => (
           <button type="button" class="filter-chip" data-tag={tag}>{tag}</button>
         ))}
       </div>
+      {tagOverflow && (
+        <button type="button" class="tag-toggle" data-tag-toggle>
+          Show all tags
+        </button>
+      )}
 
       <p class="eyebrow">Languages</p>
       <div class="filter-group" data-language-filters>
@@ -112,6 +128,26 @@ const formatDate = (date: Date) =>
     color: oklch(0.99 0.003 100);
   }
 
+  .tag-cluster.is-collapsed .filter-chip:nth-child(n + 6) {
+    display: none;
+  }
+
+  .tag-toggle {
+    display: block;
+    margin-bottom: calc(var(--baseline) * 1.2);
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-accent);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .tag-toggle:hover {
+    text-decoration: underline;
+  }
+
   .entry-category {
     color: var(--color-accent);
   }
@@ -137,10 +173,19 @@ const formatDate = (date: Date) =>
   );
   const cards = Array.from(document.querySelectorAll<HTMLElement>('.entry-card'));
   const empty = document.querySelector<HTMLElement>('.filter-empty');
+  const tagList = document.querySelector<HTMLElement>('.tag-cluster');
+  const tagToggle = document.querySelector<HTMLButtonElement>('[data-tag-toggle]');
 
   let activeCategory = '';
   let activeLanguage = '';
   const activeTags = new Set<string>();
+
+  if (tagList && tagToggle) {
+    tagToggle.addEventListener('click', () => {
+      const collapsed = tagList.classList.toggle('is-collapsed');
+      tagToggle.textContent = collapsed ? 'Show all tags' : 'Show fewer';
+    });
+  }
 
   const apply = () => {
     let visible = 0;
