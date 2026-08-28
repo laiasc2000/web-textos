@@ -23,7 +23,9 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+@import 'katex/dist/katex.min.css';
+
+:root {
     color-scheme: dark;
     --color-accent: oklch(63.994% 0.13677 161.409);
     --color-accent-hover: color-mix(in oklch, var(--color-accent), white 10%);
@@ -743,6 +745,14 @@ figcaption {
   font-style: italic;
   line-height: 1.5;
   color: var(--color-text);
+}
+
+.prose .katex-display {
+  margin-block: calc(var(--baseline) * 1.2);
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
 }
 
 /* Shiki dual themes: github-light by default, github-dark under data-theme. */
