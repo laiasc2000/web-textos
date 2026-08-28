@@ -698,6 +698,31 @@ figcaption {
 
 .prose a {
   font-weight: 700;
+  color: var(--color-accent);
+}
+
+.prose a:hover {
+  color: var(--color-accent);
+  background-size: 100% 1px;
+}
+
+.prose h2 a,
+.prose h3 a {
+  color: var(--color-accent);
+}
+
+.markdown-text.lead a,
+.entry-card .markdown-text a,
+.work-preview-description a {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.markdown-text.lead a:hover,
+.entry-card .markdown-text a:hover,
+.work-preview-description a:hover {
+  color: var(--color-accent);
+  background-size: 100% 1px;
 }
 
 .prose ul,
