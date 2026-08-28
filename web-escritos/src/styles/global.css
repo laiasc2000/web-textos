@@ -1024,6 +1024,11 @@ figcaption {
     grid-template-columns: 1fr;
   }
 
+  .site-footer {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
   h1,
   h2,
   h3 {
