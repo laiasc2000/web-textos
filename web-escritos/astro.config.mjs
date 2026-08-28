@@ -11,21 +11,15 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
-// Keystatic's admin UI and API run on server routes (Node APIs). The site
-// deploys as static files to GitHub Pages, so `npm run build` sets
-// SKIP_KEYSTATIC=true and builds statically with the production `base`.
-// In development (`astro dev`) the Keystatic routes are enabled, which needs
-// server output and the Node adapter, and Keystatic hardcodes its API path at
-// the root, so the dev `base` is dropped.
+// Keystatic's admin UI and API run on server routes (Node APIs) in development
+// only. `npm run build` sets SKIP_KEYSTATIC=true and produces a static build
+// (no adapter, `base: '/'`) which is what Netlify deploys.
 const isProdBuild = process.env.SKIP_KEYSTATIC === 'true';
 
 export default defineConfig({
-  // Change to your deployed URL. Used for sitemap, canonical, and RSS links.
-  // For a GitHub Pages project site, `site` is the user/org domain and `base`
-  // is the repository name. Drop `base` (or set it to '/') for a custom domain
-  // or a `<user>.github.io` root site.
-  site: 'https://kpab.github.io',
-  base: isProdBuild ? '/astro-keel' : '/',
+  // Your deployed URL. Used for sitemap, canonical, and RSS links.
+  site: 'https://laiaserradesanferm.netlify.app',
+  base: '/',
   adapter: isProdBuild ? undefined : node({ mode: 'standalone' }),
   integrations: [
     mdx(),
