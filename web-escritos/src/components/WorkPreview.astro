@@ -4,10 +4,19 @@ import { getCollection } from 'astro:content';
 import { withBase } from '../lib/url';
 import MarkdownText from './MarkdownText.astro';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-  .slice(0, 4);
+const selectedIds = [
+  'Supersolid',
+  'Tension Krieg',
+  'Sunlight entanglement',
+  'Javier Argüello',
+  'Noticia Alba',
+  'Quione',
+];
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const byId = new Map(allPosts.map((post) => [post.id, post]));
+const posts = selectedIds
+  .map((id) => byId.get(id))
+  .filter((post): post is NonNullable<typeof post> => Boolean(post));
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat('en', {
