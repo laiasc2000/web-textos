@@ -18,7 +18,7 @@ const isProdBuild = process.env.SKIP_KEYSTATIC === 'true';
 
 export default defineConfig({
   // Your deployed URL. Used for sitemap, canonical, and RSS links.
-  site: 'https://laiaserradesanferm.netlify.app',
+  site: 'https://laiajournalist.com',
   base: '/',
   adapter: isProdBuild ? undefined : node({ mode: 'standalone' }),
   integrations: [

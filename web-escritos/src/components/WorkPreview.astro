@@ -47,7 +47,7 @@ const formatDate = (date: Date) =>
                 {post.data.heroImage ? (
                   <Image
                     src={post.data.heroImage}
-                    alt=""
+                    alt={post.data.title}
                     width={960}
                     height={640}
                     loading="lazy"

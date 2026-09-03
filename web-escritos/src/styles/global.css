@@ -1,3 +1,5 @@
+@import 'katex/dist/katex.min.css';
+
 :root {
   color-scheme: light;
   /* Change this one line to retune the theme accent. */
@@ -23,9 +25,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-@import 'katex/dist/katex.min.css';
-
-:root {
+  :root {
     color-scheme: dark;
     --color-accent: oklch(63.994% 0.13677 161.409);
     --color-accent-hover: color-mix(in oklch, var(--color-accent), white 10%);
