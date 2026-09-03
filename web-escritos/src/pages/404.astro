@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+---
+
+<BaseLayout title="Page not found" description="Science journalist and physicist specialized in fundamental science.">
+  <section class="page-head section">
+    <div class="page-head-inner">
+      <div>
+        <p class="eyebrow">404</p>
+        <h1>Page not found</h1>
+        <p class="lead">
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section prose-stack">
+    <p>
+      The page you were looking for doesn't exist, or may have moved. Head back to the
+      homepage or browse the latest articles.
+    </p>
+    <div class="notfound-actions">
+      <a class="button" href={withBase('/')}>Back to home</a>
+      <a class="button" href={withBase('/blog/')}>Browse articles</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .button-ghost {
+    background: none;
+    border: var(--hairline);
+  }
+</style>

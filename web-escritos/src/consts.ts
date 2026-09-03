@@ -5,9 +5,11 @@ export const SITE = {
   /** Site name — used in the header brand, <title>, and og:site_name. */
   title: 'Laia Serradesanferm',
   /** Default meta description for pages that don't set their own. */
-  description: 'Science journalist and physicist specialized in fundamental science.',
+  description:
+    'Science journalist and physicist specialized in fundamental science. Laia writes news, features, interviews, and science-inspired stories.',
   /** Description of the RSS feed at /rss.xml. */
-  rssDescription: 'Science journalist and physicist specialized in fundamental science.',
+  rssDescription:
+    'Science journalist and physicist specialized in fundamental science. Laia writes news, features, interviews, and science-inspired stories.',
   /** Default social share image, relative to the site root (see public/). */
   ogImage: '/og.jpg',
   /** Footer credit line. */
