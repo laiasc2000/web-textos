@@ -30,7 +30,8 @@ const {
 const siteBase = Astro.site ?? new URL(Astro.url.origin);
 const canonicalURL = new URL(Astro.url.pathname, siteBase);
 const imageURL = image ? new URL(image, siteBase) : new URL(withBase(SITE.ogImage), siteBase);
-const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+const metaTitle = 'Laia Serradesanferm | Science Journalist';
+const fullTitle = title === siteName ? metaTitle : `${title} — ${siteName}`;
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) => {
