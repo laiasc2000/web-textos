@@ -11,21 +11,6 @@ export const CATEGORIES = ['News', 'Feature', 'Interview', 'Profile', 'Explainer
 /** Article languages. An article is written in exactly one language. */
 export const LANGUAGES = ['CAT', 'ESP', 'ENG'] as const;
 
-const works = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/works' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      tech: z.array(z.string()),
-      link: z.string().url().optional(),
-      repo: z.string().url().optional(),
-      thumbnail: image().optional(),
-      order: z.number().optional(),
-      publishDate: z.coerce.date(),
-    }),
-});
-
 const blog = defineCollection({
   loader: glob({
     pattern: '**/[^_]*.{md,mdx}',
@@ -51,4 +36,4 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { works, blog };
+export const collections = { blog };

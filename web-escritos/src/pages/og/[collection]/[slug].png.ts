@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { SITE } from '../../../consts';
 import { markdownToText } from '../../../lib/markdown';
 
-// Build-time generated Open Graph images for every blog post and work entry,
+// Build-time generated Open Graph images for every blog post,
 // rendered in the theme's light palette (see global.css tokens). The static
 // `public/og.jpg` remains the site-wide fallback for all other pages.
 
@@ -20,7 +20,6 @@ type OgProps = {
 
 export const getStaticPaths = (async () => {
   const blog = await getCollection('blog', ({ data }) => !data.draft);
-  const works = await getCollection('works');
   const toOg = async (
     entry: { data: { title: string; description: string } },
     kind: string,
@@ -30,10 +29,8 @@ export const getStaticPaths = (async () => {
     kind,
   });
   const blogProps = await Promise.all(blog.map((entry) => toOg(entry, 'Blog')));
-  const worksProps = await Promise.all(works.map((entry) => toOg(entry, 'Work')));
   return [
     ...blogProps.map((props, i) => ({ params: { collection: 'blog', slug: blog[i].id }, props })),
-    ...worksProps.map((props, i) => ({ params: { collection: 'works', slug: works[i].id }, props })),
   ];
 }) satisfies GetStaticPaths;
 
