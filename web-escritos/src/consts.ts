@@ -3,7 +3,7 @@
 
 export const SITE = {
   /** Site name — used in the header brand, <title>, and og:site_name. */
-  title: 'Laia Serradesanferm',
+  title: 'Laia Serradesanferm | Science Journalist',
   /** Default meta description for pages that don't set their own. */
   description:
     'Science journalist and physicist specialized in fundamental science. Laia writes news, features, interviews, and science-inspired stories.',
